@@ -1,81 +1,100 @@
-# AI Literacy LLMSkill
+# Italian LLM Skills
 
-Portable `SKILL.md` package for creating, running, updating, and tracking a personalized AI literacy course.
+A collection of portable `SKILL.md` skills aimed at people working in Italian
+with LLM-based assistants (Claude, Codex/ChatGPT, Gemini, local agents). Each
+skill lives in its own folder under `skills/` and can be used on its own.
 
-The skill is designed around a cross-platform core:
+The repo started as an AI literacy skill and is expanding into a wider set of
+engineering and productivity skills, translated and adapted into Italian.
 
-- OpenAI/Codex/ChatGPT skill-compatible environments: install the `ai-literacy-course/` folder.
-- Claude/Anthropic skill-compatible environments: install the `ai-literacy-course/` folder where custom skills are loaded.
-- Local/open agents that support Agent Skills, such as OpenClaw-style or Ollama-backed agent shells: point the agent at `ai-literacy-course/SKILL.md`.
-- Gemini/Gems and generic chatbots: use the adapter prompts in `adapters/`.
+## Available skills
 
-## What It Does
+| Skill | What it does | Download |
+| --- | --- | --- |
+| **ai-literacy-course** | Adaptive AI literacy tutor: creates, runs, updates, and tracks a personal course with a durable tracker. | [SKILL.md](skills/ai-literacy-course/SKILL.md) · [direct download](https://raw.githubusercontent.com/gcmdnt90/AI-Literacy-LLMSkill/master/skills/ai-literacy-course/SKILL.md) |
+| **grill-me** | Interviews and grills you relentlessly about a plan or design until every decision is pinned down. | [SKILL.md](skills/grill-me/SKILL.md) · [direct download](https://raw.githubusercontent.com/gcmdnt90/AI-Literacy-LLMSkill/master/skills/grill-me/SKILL.md) |
+| **grill-with-docs** | Like `grill-me`, but stress-tests the plan against the domain model, sharpens terminology, and updates `CONTEXT.md` and ADRs. | [SKILL.md](skills/grill-with-docs/SKILL.md) · [direct download](https://raw.githubusercontent.com/gcmdnt90/AI-Literacy-LLMSkill/master/skills/grill-with-docs/SKILL.md) |
 
-- Creates and updates a durable `ai-literacy-program.md` tracker.
-- Builds an adaptive AI literacy course for the learner.
-- Uses embedded diagnosis with occasional quizzes.
-- Tracks evidence across Stanford AI literacy domains, MAILS dimensions, GAAIS/GAAIS-IT attitude signals, and generative-AI competencies.
-- Updates the course by checking authoritative AI literacy and methodology sources when web/search is available.
+The skill names (`grill-me`, `grill-with-docs`) stay in English, but the
+description is bilingual: the skill also triggers when you speak Italian, e.g.
+"intervistami", "interrogami", "mettimi alla prova", "definizione".
 
-## Repo Structure
+> The `grill-me` and `grill-with-docs` skills are Italian adaptations and
+> translations of the same-named skills by
+> [Matt Pocock](https://github.com/mattpocock/skills) (MIT license).
+> See [`CREDITS.md`](CREDITS.md).
+
+## Repo structure
 
 ```text
 AI-Literacy-LLMSkill/
   README.md
+  README_EN.md
   LICENSE
+  CREDITS.md
   .gitignore
   adapters/
     gemini-gem-instructions.md
     generic-chatbot-prompt.md
-  ai-literacy-course/
-    SKILL.md
-    agents/openai.yaml
-    references/
-      standards-map.md
-      course-update-sources.md
-    assets/
-      ai-literacy-program-template.md
+  skills/
+    ai-literacy-course/
+      SKILL.md
+      agents/openai.yaml
+      references/
+        standards-map.md
+        course-update-sources.md
+      assets/
+        ai-literacy-program-template.md
+    grill-me/
+      SKILL.md
+    grill-with-docs/
+      SKILL.md
+      CONTEXT-FORMAT.md
+      ADR-FORMAT.md
 ```
 
 ## Install
 
+### Generic chatbot — also works for Claude/Gemini/ChatGPT
+
+Download the `SKILL.md` of the skill you want (see the table above) and attach it
+to a conversation, asking the assistant to follow it as an operating procedure.
+
 ### OpenAI / Codex
 
-Copy `ai-literacy-course/` into your skills directory, for example:
+Copy the skill folder into your skills directory, for example:
 
 ```text
 ~/.codex/skills/ai-literacy-course
-```
-
-Then invoke:
-
-```text
-Use $ai-literacy-course to start or continue my personal AI literacy course.
+~/.codex/skills/grill-me
+~/.codex/skills/grill-with-docs
 ```
 
 ### Claude / Anthropic
 
-Install the `ai-literacy-course/` folder as a custom skill in the skill location supported by your Claude product. The skill follows the `SKILL.md` directory pattern with optional `references/` and `assets/`.
+Install the skill folder as a custom skill in the location supported by your
+Claude product. Each skill follows the `SKILL.md` directory pattern with optional
+`references/` and `assets/`.
 
 ### Gemini / Gems
 
-Gemini Gems use custom instructions rather than the same native `SKILL.md` loader. Use `adapters/gemini-gem-instructions.md` as the Gem instruction body, and upload or paste `ai-literacy-course/SKILL.md` plus the tracker template if the product supports files.
+Gemini Gems use custom instructions rather than the native `SKILL.md` loader.
+Use `adapters/gemini-gem-instructions.md` as the Gem instruction body, and upload
+or paste the desired skill's `SKILL.md`.
 
 ### Generic Chatbots
 
-Use `adapters/generic-chatbot-prompt.md`. Attach or paste `ai-literacy-course/SKILL.md` and ask the chatbot to follow it as an operating procedure.
+Use `adapters/generic-chatbot-prompt.md`. Attach or paste the skill's `SKILL.md`
+and ask the chatbot to follow it as an operating procedure.
 
-## Persistence Requirement
+## Note on the ai-literacy-course skill
 
-The course needs durable state. The preferred state file is:
+The `ai-literacy-course` skill needs durable state. The preferred state file is
+`ai-literacy-program.md`. If the environment cannot write or preserve files, the
+skill asks the user to enable local files, artifacts, project memory, or another
+durable storage mechanism before relying on continuity.
 
-```text
-ai-literacy-program.md
-```
-
-If the environment cannot write or preserve files, the skill should ask the user to enable local files, artifacts, project memory, or another durable storage mechanism before relying on continuity.
-
-## Main References
+Main references for the skill:
 
 - Stanford Teaching Commons, Artificial Intelligence Teaching Guide.
 - Stanford Teaching Commons, Understanding AI Literacy.
@@ -83,4 +102,10 @@ If the environment cannot write or preserve files, the skill should ask the user
 - GAAIS and GAAIS-IT.
 - Generative AI Literacy: Twelve Defining Competencies.
 
-Detailed source handling is in `ai-literacy-course/references/`.
+Detailed source handling is in `skills/ai-literacy-course/references/`.
+
+## License
+
+The code and content in this repository are released under the MIT license (see
+[`LICENSE`](LICENSE)). Third-party material and its license notices are listed in
+[`CREDITS.md`](CREDITS.md).
