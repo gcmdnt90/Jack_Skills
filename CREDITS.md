@@ -13,6 +13,11 @@ sono adattamenti e traduzioni in italiano delle skill omonime del repository
 licenza MIT. Il testo originale è in inglese; questa versione ne è una
 traduzione modificata.
 
+Lo strato "carta fondativa" (`skills/grill-with-docs/PROJECT-FORMAT.md` e il
+relativo file `PROJECT.md` generato dalla skill) è un'aggiunta originale di
+questo repository e non deriva da `mattpocock/skills`. È coperto dalla licenza
+MIT del repository (© 2026 Giacomo Di Noto).
+
 Nota di copyright e licenza originali:
 
 ```

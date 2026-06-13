@@ -1,6 +1,6 @@
 ---
 name: grill-with-docs
-description: Sessione di interrogazione che mette alla prova il tuo piano rispetto al modello di dominio esistente, affina la terminologia e aggiorna la documentazione (CONTEXT.md, ADR) man mano che le decisioni si consolidano. Usala quando l'utente vuole verificare un piano rispetto al linguaggio e alle decisioni documentate del progetto, definire i termini del dominio, o dice "intervistami con i documenti", "interrogami con la documentazione", "definizione", "linguaggio del dominio", "glossario", "grill with docs".
+description: Sessione di interrogazione che mette alla prova il tuo piano rispetto al modello di dominio esistente, affina la terminologia e aggiorna la documentazione (PROJECT.md, CONTEXT.md, ADR) man mano che le decisioni si consolidano. Usala quando l'utente vuole verificare un piano rispetto alla carta, al linguaggio e alle decisioni documentate del progetto, definire i termini del dominio, chiarire scopo, obiettivi o non obiettivi del progetto, o dice "intervistami con i documenti", "interrogami con la documentazione", "definizione", "linguaggio del dominio", "glossario", "carta del progetto", "obiettivi", "non obiettivi", "principi", "grill with docs".
 ---
 
 <cosa-fare>
@@ -25,6 +25,7 @@ La maggior parte dei repository ha un singolo contesto:
 
 ```
 /
+├── PROJECT.md
 ├── CONTEXT.md
 ├── docs/
 │   └── adr/
@@ -37,6 +38,7 @@ Se nella radice esiste un file `CONTEXT-MAP.md`, il repository ha più contesti.
 
 ```
 /
+├── PROJECT.md                        ← carta dell'intero sistema
 ├── CONTEXT-MAP.md
 ├── docs/
 │   └── adr/                          ← decisioni a livello di sistema
@@ -49,9 +51,28 @@ Se nella radice esiste un file `CONTEXT-MAP.md`, il repository ha più contesti.
 │       └── docs/adr/
 ```
 
-Crea i file con pigrizia — solo quando hai qualcosa da scrivere. Se non esiste alcun `CONTEXT.md`, crealo quando il primo termine viene definito. Se non esiste alcuna cartella `docs/adr/`, creala quando serve il primo ADR.
+Crea i file con pigrizia — solo quando hai qualcosa da scrivere. Se non esiste alcun `PROJECT.md`, crealo quando emergono il primo obiettivo o il primo non obiettivo chiari. Se non esiste alcun `CONTEXT.md`, crealo quando il primo termine viene definito. Se non esiste alcuna cartella `docs/adr/`, creala quando serve il primo ADR.
+
+### I quattro strati
+
+La documentazione si articola su quattro strati, dal più stabile al più volatile. Ognuno cattura ciò che gli altri non possono recuperare; prima di scrivere qualcosa, chiediti a quale strato appartiene.
+
+| Strato          | Risponde a                  | Stabilità           | File / luogo       |
+| --------------- | --------------------------- | ------------------- | ------------------ |
+| **Carta**       | Perché esiste / per chi     | Quasi immutabile    | `PROJECT.md`       |
+| **Linguaggio**  | Cosa significano i termini  | Si affina nel tempo | `CONTEXT.md`       |
+| **Decisioni**   | Perché abbiamo scelto così  | Append-only         | `docs/adr/`        |
+| **Lavoro vivo** | Cosa / quando               | Alta rotazione      | issue, PRD, board  |
+
+Lo stato corrente, la roadmap e i "prossimi passi" sono **lavoro vivo**: non vanno in `PROJECT.md`. La carta dice dove si va, non a che punto siamo.
 
 ## Durante la sessione
+
+### Confronta con la carta del progetto
+
+Tieni `PROJECT.md` come bussola. Quando un piano o un'idea contraddice lo scopo, gli obiettivi o — soprattutto — i **non obiettivi** dichiarati, segnalalo subito. "Stai proponendo X, ma `PROJECT.md` elenca X tra i non obiettivi — è cambiata la direzione, o questo va fuori ambito?"
+
+Aggiorna `PROJECT.md` solo quando cambia davvero l'intento del progetto: emerge un nuovo obiettivo o non obiettivo, oppure si chiarisce un principio. Non usarlo per stato o roadmap. Usa il formato in [PROJECT-FORMAT.md](./PROJECT-FORMAT.md).
 
 ### Confronta con il glossario
 
@@ -89,6 +110,8 @@ Se manca anche una sola delle tre, salta l'ADR. Usa il formato in [ADR-FORMAT.md
 
 <!--
 Adattamento e traduzione in italiano della skill "grill-with-docs" di Matt
-Pocock (mattpocock/skills), distribuita con licenza MIT. Vedi CREDITS.md nella
-radice del repository per la nota di copyright e la licenza complete.
+Pocock (mattpocock/skills), distribuita con licenza MIT. Lo strato "carta
+fondativa" (PROJECT.md / PROJECT-FORMAT.md) è un'estensione originale di questo
+repository e non fa parte della skill originale. Vedi CREDITS.md nella radice
+del repository per la nota di copyright e la licenza complete.
 -->
